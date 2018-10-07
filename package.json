@@ -1,0 +1,31 @@
+{
+    "name": "node-red-contrib-mespeak",
+    "version": "1.0.0",
+    "description": "A Node Red node for text-to-speech conversion (without dependencies)",
+    "dependencies": {
+        "mespeak": "2.0.2"
+    },
+    "author": {
+        "name": "Bart Butenaers"
+    },
+    "license": "Apache-2.0",
+    "keywords": [
+        "node-red",
+        "tts",
+        "text",
+        "speach"
+    ],
+    "bugs": {
+        "url": "https://github.com/bartbutenaers/node-red-contrib-mespeak/issues"
+    },
+    "homepage": "https://github.com/bartbutenaers/node-red-contrib-mespeak",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/bartbutenaers/node-red-contrib-mespeak.git"
+    },
+    "node-red": {
+        "nodes": {
+            "mespeak": "mespeak.js"
+        }
+    }
+}
