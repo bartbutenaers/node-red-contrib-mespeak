@@ -1,0 +1,103 @@
+<!--
+  Copyright 2018, Bart Butenaers
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<script type="text/x-red" data-template-name="mespeak">
+    <div class="form-row">
+        <label for="node-input-amplitude"><i class="fa fa-arrows-alt-v"></i> Amplitude</label>
+        <input type="number" id="node-input-amplitude" min="1" max="100"/>
+    </div>
+    <div class="form-row">
+        <label for="node-input-pitch"><i class="fa fa-signature"></i> Pitch</label>
+        <input type="number" id="node-input-pitch"/>
+    </div>
+    <div class="form-row">
+        <label for="node-input-speed"><i class="fa fa-tachometer-alt"></i> Speed</label>
+        <input type="number" id="node-input-speed"/>
+    </div>    
+    <div class="form-row">
+        <label for="node-input-voice"><i class="fa fa-exchange"></i> Voice</label>
+        <select id="node-input-voice">
+            <option value='ca'>Català</option>
+            <option value='cs'>Česky</option>
+            <option value='de'>Deutsch</option>
+            <option value='el'>Ελληνικά</option>
+            <option value='en'>English</option>
+            <option value='eo'>Esperanto</option>
+            <option value='es'>Español</option>
+            <option value='et'>Eesti</option>
+            <option value='fi'>Suomi</option>
+            <option value='fr'>Français</option>
+            <option value='hu'>Magyar</option>
+            <option value='it'>Italiano</option>
+            <option value='kn'>ಕನ್ನಡ</option>
+            <option value='la'>Latina</option>  
+            <option value='lv'>Latviešu</option>
+            <option value='nl'>Nederlands, Vlaams</option>
+            <option value='pl'>Polski</option>
+            <option value='pt'>Português</option>
+            <option value='ro'>Română</option>
+            <option value='sk'>Slovenčina</option>
+            <option value='sv'>Svenska</option>
+            <option value='tr'>Türkçe</option>
+            <option value='zh-yue'>粵語</option> 
+            <option value='zh'>中文</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-wordgap"><i class="fa-text-width"></i> Word gap</label>
+        <input type="number" id="node-input-wordgap"/>
+    </div>      
+    <div class="form-row">
+        <label for="node-input-volume"><i class="fa fa-volume-up"></i> Volume</label>
+        <input type="number" id="node-input-volume" min="0" max="1" step="0.01"/>
+    </div>
+    <br>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('mespeak', {
+        category: 'audio',
+        color: 'rgb(178, 102, 255)',
+        defaults: {
+            name: {value: ""},
+            amplitude: {value: 100},
+            pitch: {value: 50},
+            speed: {value: 175},
+            voice: {value: "en"},
+            wordgap: {value: 0}
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "tts.png",
+        label: function() {
+            return this.name || "TTS mespeak";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-help-name="mespeak">
+    <p>Node Red node for text-to-speech conversion (without dependencies).</p>
+    <p><strong>Amplitude:</strong><br/>
+    How loud the voice will be.</p>
+    <p><strong>Pitch:</strong><br/>
+    The voice pitch.</p>
+    <p><strong>Speed:</strong><br/>
+    The speed at which to talk (words per minute).</p>
+    <p><strong>Voice:</strong><br/>
+    Which voice to use.</p>
+    <p><strong>Word gap:</strong><br/>
+    Additional gap between words, in 10 ms units.</p>    
+</script>
