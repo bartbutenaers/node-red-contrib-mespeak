@@ -14,17 +14,22 @@
  * limitations under the License.
  **/
 module.exports = function(RED) {
-	var meSpeak = require("mespeak");
+    var meSpeak = require("mespeak");
 
-	function MeSpeakNode(config) {
-		RED.nodes.createNode(this, config);
+    function MeSpeakNode(config) {
+        RED.nodes.createNode(this, config);
         this.amplitude = config.amplitude || 100;
         this.pitch     = config.pitch || 50;
         this.speed     = config.speed || 175;
         this.voice     = config.voice || "en";
         this.wordgap   = config.wordgap || 0;
+        this.volume    = config.volume || 1;
 
         var node = this;
+        
+        if (!meSpeak.isConfigLoaded()) {
+            meSpeak.loadConfig(require("mespeak/src/mespeak_config.json"));
+        }
         
         // Load the selected voice
         meSpeak.loadVoice(require("mespeak/voices/en/" + node.voice + ".json"));
@@ -34,15 +39,16 @@ module.exports = function(RED) {
                          pitch: node.pitch,
                          speed: node.speed,
                          voice: node.voice,
-                         wordgap: node.wordgap
+                         wordgap: node.wordgap,
+                         volume: node.volume
                        }
     
         node.on("input", function(msg) {
             // Convert the msg.payload from text to WAV buffer
-            msg.payload = meSpeak.speak(msg.payload, node.options))
+            msg.payload = meSpeak.speak(msg.payload, node.options);
             node.send(msg);
         });
     }
   
-	RED.nodes.registerType("mespeak", MeSpeakNode);
+    RED.nodes.registerType("mespeak", MeSpeakNode);
 }
